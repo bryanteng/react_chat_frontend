@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
+import Chatroom from './containers/chatroom'
 
 class App extends Component {
   render() {
     return (
       <div className="App">
-        Hello world
+        <Chatroom />
       </div>
     );
   }
