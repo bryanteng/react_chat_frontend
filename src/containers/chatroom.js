@@ -1,9 +1,13 @@
 import React, { Component, Fragment } from 'react';
+import { ActionCable } from 'react-actioncable-provider';
+import { API_ROOT } from '../constants';
+import Cable from '../components/Cable';
 
 class Chatroom extends Component{
 
   state={
     context: "",
+    chatroom_id: 1,
     messages: []
   }
 
@@ -13,19 +17,19 @@ class Chatroom extends Component{
 
   handleOnSubmit = (event) =>{
     event.preventDefault()
-    fetch('http://localhost:3000/messages', {
+    fetch(`${API_ROOT}/messages`, {
     method: "POST",
     headers:{
         "Content-type": "application/json"
     },
-      body: JSON.stringify({context: this.state.context, user_id: 2, classroom_id: 1})
+      body: JSON.stringify({context: this.state.context, user_id: 2, classroom_id: this.state.chatroom_id})
     }
   )
     this.setState({messages: [...this.state.messages, this.state.context], context: ""})
   }
 
   componentDidMount(){
-    fetch('http://localhost:3000/messages')
+    fetch(`${API_ROOT}/messages`)
     .then(res => res.json())
     .then(messages => {
       this.setState({messages: messages.map(message=> message.context) })
