@@ -5,6 +5,7 @@ import NewClassroomForm from './newClassroomForm';
 import MessagesArea from './messagesArea';
 import Cable from './Cable';
 
+
 class ClassroomsList extends React.Component {
   state = {
     classrooms: [],
@@ -80,7 +81,7 @@ const mapClassrooms = (classrooms, handleClick) => {
   return classrooms.map(classroom => {
     return (
       <li key={classroom.id} onClick={() => handleClick(classroom.id)}>
-        {classroom.name}
+        name: {classroom.name} subject: {classroom.subject}
       </li>
     );
   });

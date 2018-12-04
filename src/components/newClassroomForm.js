@@ -27,7 +27,9 @@ class NewClassroomForm extends React.Component {
         <form onSubmit={this.handleSubmit}>
           <label>New Classroom:</label>
           <br />
+          <label>Class Name:</label>
           <input type="text" id="name" value={this.state.name} onChange={this.handleChange} />
+          <label>Class Subject:</label>
           <input type="text" id="subject" value={this.state.subject} onChange={this.handleChange} />
           <input type="submit" />
         </form>
