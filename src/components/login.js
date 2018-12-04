@@ -9,7 +9,15 @@ export default class Login extends Component{
 
   handleSubmit = (event) =>{
     event.preventDefault()
-    fetch('http://localhost:3000/users')
+    fetch('http://localhost:3000/login',{
+      method: "POST",
+      headers: {
+        "Content-type": "application/json",
+        "Accepts": "application/json"
+      },
+      body: JSON.stringify({user: {username: this.state.username}})
+    }).then(res => res.json())
+    .then(console.log)
   }
 
   handleChange = (event) =>{
