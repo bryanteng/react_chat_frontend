@@ -1,6 +1,8 @@
 import React, { Component, Fragment } from 'react';
+import { connect } from 'react-redux'
+import { setUser } from '../actions/login'
 
-export default class Login extends Component{
+class Login extends Component{
 
   state={
     username:"",
@@ -17,7 +19,7 @@ export default class Login extends Component{
       },
       body: JSON.stringify({user: {username: this.state.username}})
     }).then(res => res.json())
-    .then(console.log)
+      .then(data => setUser(data.user))
   }
 
   handleChange = (event) =>{
@@ -39,3 +41,5 @@ export default class Login extends Component{
     )
   }
 }
+
+export default connect(null, { setUser })(Login)

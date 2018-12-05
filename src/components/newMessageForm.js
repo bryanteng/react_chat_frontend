@@ -1,10 +1,10 @@
 import React from 'react';
 import { API_ROOT, HEADERS } from '../constants';
+import { connect } from 'react-redux'
 
 class newMessageForm extends React.Component {
   state = {
     context: '',
-    user_id: 2,
     classroom_id: this.props.classroom_id
   };
 
@@ -12,22 +12,22 @@ class newMessageForm extends React.Component {
     this.setState({ classroom_id: nextProps.classroom_id });
   };
 
-  handleChange = e => {
-    this.setState({ context: e.target.value });
+  handleChange = (event) => {
+    this.setState({ context: event.target.value });
   };
 
-  handleSubmit = e => {
-    e.preventDefault();
+  handleSubmit = (event) => {
+    event.preventDefault();
 
     fetch(`${API_ROOT}/messages`, {
       method: 'POST',
       headers: HEADERS,
-      body: JSON.stringify(this.state)
+      body: JSON.stringify({...this.props,...this.state})
     });
     this.setState({ context: '' });
   };
 
-  render = () => {
+  render(){
     return (
       <div className="newMessageForm">
         <form onSubmit={this.handleSubmit}>
@@ -45,4 +45,10 @@ class newMessageForm extends React.Component {
   };
 }
 
-export default newMessageForm;
+const mapStateToProps = (state) =>{
+  return{
+    user_id: state.login.user_id
+  }
+}
+
+export default connect(mapStateToProps, null)(newMessageForm)
