@@ -11,15 +11,15 @@ class Login extends Component{
 
   handleSubmit = (event) =>{
     event.preventDefault()
-    fetch('http://localhost:3000/login',{
+    fetch('http://localhost:3000/users',{
       method: "POST",
       headers: {
         "Content-type": "application/json",
         "Accepts": "application/json"
       },
-      body: JSON.stringify({user: {username: this.state.username}})
+      body: JSON.stringify({username: this.state.username})
     }).then(res => res.json())
-      .then(data => setUser(data.user))
+      .then(data => this.props.setUser(data))
   }
 
   handleChange = (event) =>{
